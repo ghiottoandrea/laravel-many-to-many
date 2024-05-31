@@ -7,7 +7,7 @@
             Add a new project
         </h1>
 
-        <form action="{{ route('admin.projects.store') }}" method="post">
+        <form action="{{ route('admin.projects.store') }}" method="post" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
@@ -52,13 +52,15 @@
             </div>
 
             <div class="mx-auto d-flex justify-content-between text-end mt-3">
-                <button type="submit"
-                    class="btn btn-warning rounded-3 fw-light text-secondary btn-sm fs-2 px-3 py-1">Submit</button>
 
-                <a class="btn btn-secondary rounded-3 fw-light text-light btn-sm fs-2 px-3 py-1"
-                    href="{{ route('admin.projects.index') }}" role="button">
+                <button type="submit" class="btn btn-primary">
+                    Submit
+                </button>
+
+                <a class="btn btn-secondary" href="{{ route('admin.projects.index') }}" role="button">
                     Go back
                 </a>
+
             </div>
 
         </form>

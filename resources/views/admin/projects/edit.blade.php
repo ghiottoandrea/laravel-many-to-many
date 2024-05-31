@@ -13,9 +13,9 @@
             </div>
         @endif
 
-        <div class="display-6 mt-5 mb-3 _edit-title fw-bolder text-info">
+        <div class="mt-5 mb-3 text-primary">
             <span>Make adjustments to your</span>
-            <span class="text-warning">{{ $project->title }}</span>
+            <span class="text-info">{{ $project->title }}</span>
             <span>project</span>
         </div>
 
@@ -23,7 +23,7 @@
             @csrf
             @method('PUT')
 
-            @include('partials.validation-messages')
+            @include('admin.partials.validation-errors')
 
             <div class="mb-3">
                 <label class="text-light fw-light" for="title" class="form">Title</label>
@@ -37,52 +37,6 @@
                     aria-describedby="DescriptionHelp"
                     placeholder="ex. The project collects the entire source code for the creation of a web app of a real post office...">{{ old('description', $project->description) }}
                 </textarea>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label text-light fw-light" for="type_id">Project Type</label>
-                <select class="form-select form-select" name="type_id" id="type_id">
-                    <option selected>Select a type</option>
-
-                    @foreach ($types as $type)
-                        <option value="{{ $type->id }}"
-                            {{ $type->id == old('type_id', $project->type_id) ? 'selected' : '' }}>{{ $type->name }}
-                        </option>
-                    @endforeach
-
-                </select>
-            </div>
-
-            <label class="form-label text-light fw-light" for="technology">Project Type</label>
-            <div class="mb-3 d-flex border border-light rounded gap-1 py-2">
-
-                @foreach ($technologies as $technology)
-                    @if ($errors->any())
-                        <div class="form-check ">
-                            <h4 class="text-danger">error</h4>
-
-
-                            <div class="form-check">
-
-                                <input name="technologies[]" type="checkbox" class="btn-check"
-                                    id="tag-{{ $technology->id }}" value="{{ $technology->id }}" autocomplete="off"
-                                    {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
-                                <label class="btn text-light"
-                                    for="tag-{{ $technology->id }}">{{ $technology->name }}</label>
-
-                            </div>
-                        @else
-                            <div class="form-check">
-
-                                <input name="technologies[]" type="checkbox" class="btn-check"
-                                    id="tag-{{ $technology->id }}" value="{{ $technology->id }}" autocomplete="off"
-                                    {{ in_array($technology->id, $project->technologies->pluck('id')->toArray()) ? 'checked' : '' }}>
-                                <label class="btn text-light" for="tag-{{ $technology->id }}">{{ $technology->name }}
-                                </label>
-
-                            </div>
-                    @endif
-                @endforeach
             </div>
 
             <div class="mb-3">
@@ -120,18 +74,17 @@
                             Project
                             View</label>
                         <input type="text" class="form-control" name="link_to_project_view" id="link_to_project_view"
-                            aria-describedby="link_to_project_viewHelp"
-                            placeholder="Type here the Link to the Project View"
+                            aria-describedby="link_to_project_viewHelp" placeholder="Type here the Link to the Project View"
                             value="{{ old('link_to_project_view', $project->link_to_project_view) }}">
                     </div>
 
-                    <div class="mb-3 ">
+                    {{-- <div class="mb-3 ">
                         <label for="preview_image" class="form-label text-light fw-light">Update your preview
                             image</label>
                         <input type="file" class="form-control" @error('cover_image') is-invalid @enderror
                             name="preview_image" id="preview_image" placeholder="" aria-describedby="fileHelpId"
                             value="{{ old('preview_image', $project->preview_image) }}" />
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="img d-flex w-25 flex-column align-items-end">
@@ -146,11 +99,9 @@
             </div>
 
             <div class="mx-auto d-flex justify-content-between text-end mt-3">
-                <button type="submit"
-                    class="btn btn-info rounded-3 fw-light text-secondary btn-sm fs-2 px-3 py-1">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
 
-                <a class="btn btn-secondary rounded-3 fw-light text-light btn-sm fs-2 px-3 py-1"
-                    href="{{ url()->previous() }}" role="button">
+                <a class="btn btn-secondary" href="{{ url()->previous() }}" role="button">
                     Go back
                 </a>
             </div>
