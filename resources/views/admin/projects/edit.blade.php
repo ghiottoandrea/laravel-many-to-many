@@ -78,13 +78,13 @@
                             value="{{ old('link_to_project_view', $project->link_to_project_view) }}">
                     </div>
 
-                    {{-- <div class="mb-3 ">
+                    <div class="mb-3 ">
                         <label for="preview_image" class="form-label text-light fw-light">Update your preview
                             image</label>
                         <input type="file" class="form-control" @error('cover_image') is-invalid @enderror
                             name="preview_image" id="preview_image" placeholder="" aria-describedby="fileHelpId"
                             value="{{ old('preview_image', $project->preview_image) }}" />
-                    </div> --}}
+                    </div>
                 </div>
 
                 <div class="img d-flex w-25 flex-column align-items-end">

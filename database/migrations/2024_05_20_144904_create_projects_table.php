@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('project_end_date');
             $table->string('link_to_source_code')->nullable();
             $table->string('link_to_project_view')->nullable();
+            $table->string('preview_image')->nullable();
             $table->timestamps();
         });
     }

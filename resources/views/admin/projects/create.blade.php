@@ -51,6 +51,13 @@
                     value="{{ old('link_to_project_view') }}">
             </div>
 
+            <div class="mb-3 ">
+                <label for="preview_image" class="form-label text-light fw-light">Update your preview
+                    image</label>
+                <input type="file" class="form-control" @error('cover_image') is-invalid @enderror name="preview_image"
+                    id="preview_image" placeholder="" aria-describedby="fileHelpId" value="{{ old('preview_image') }}" />
+            </div>
+
             <div class="mx-auto d-flex justify-content-between text-end mt-3">
 
                 <button type="submit" class="btn btn-primary">
