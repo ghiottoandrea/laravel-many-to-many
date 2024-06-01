@@ -7,6 +7,8 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use App\Models\Technology;
+use App\Models\Type;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -21,10 +23,10 @@ class ProjectController extends Controller
 
     public function create()
     {
-
+        $types = Type::all();
         $technologies = Technology::all();
 
-        return view('admin.projects.create', compact('technologies'));
+        return view('admin.projects.create', compact('technologies', 'types'));
 
     }
 
@@ -44,19 +46,21 @@ class ProjectController extends Controller
 
     }
 
-    public function show(Project $project)
+    public function show(Project $project, Type $type)
     {
+        $types = Type::all();
 
-        return view('admin.projects.show', compact('project'));
+        return view('admin.projects.show', compact('project', 'types'));
 
     }
 
-    public function edit(Project $project)
+    public function edit(Project $project, Type $type)
     {
 
         $technologies = Technology::all();
+        $types = Type::all();
 
-        return view('admin.projects.edit', compact('project', 'technologies'));
+        return view('admin.projects.edit', compact('project', 'technologies', 'types'));
 
     }
 
@@ -66,6 +70,16 @@ class ProjectController extends Controller
         $validated = $request->validated();
 
         $project->update($validated);
+
+        if ($request->has('preview_image')) {
+
+            if ($project->preview_image) {
+                Storage::delete($project->preview_image);
+            }
+
+            $image_path = Storage::put('uploads', $validated['preview_image']);
+            $validated['preview_image'] = $image_path;
+        }
 
         //$technologies = Technology::all();
 

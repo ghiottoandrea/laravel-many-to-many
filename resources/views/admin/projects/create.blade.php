@@ -36,6 +36,18 @@
                     value="{{ old('project_end_date') }}">
             </div>
 
+            <div class="mb-3">
+                <label class="form-label text-light fw-light" for="type_id">Project Type</label>
+                <select class="form-select form-select" name="type_id" id="type_id">
+                    <option selected>Select a type</option>
+
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    @endforeach
+
+                </select>
+            </div>
+
             <label class="form-label fw-light" for="technology">Project Type</label>
             <div class="mb-3 d-flex border rounded gap-1 py-2">
 
