@@ -85,7 +85,7 @@
                     id="preview_image" placeholder="" aria-describedby="fileHelpId" value="{{ old('preview_image') }}" />
             </div>
 
-            <div class="mx-auto d-flex justify-content-between text-end mt-3">
+            <div class="mx-auto d-flex justify-content-between text-end mt-3 mb-3">
 
                 <button type="submit" class="btn btn-primary">
                     Submit

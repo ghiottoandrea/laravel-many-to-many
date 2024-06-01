@@ -54,7 +54,21 @@
                     value="{{ old('project_end_date', $project->project_end_date) }}">
             </div>
 
-            <label class="form-label fw-light" for="technology">Project Type</label>
+            <div class="mb-3">
+                <label class="form-label text-light fw-light" for="type_id">Project Type</label>
+                <select class="form-select form-select" name="type_id" id="type_id">
+                    <option selected>Select a type</option>
+
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}"
+                            {{ $type->id == old('type_id', $project->type_id) ? 'selected' : '' }}>{{ $type->name }}
+                        </option>
+                    @endforeach
+
+                </select>
+            </div>
+
+            <label class="form-label fw-light" for="technology">Project Technologies</label>
             <div class="mb-3 d-flex border rounded gap-1 py-2">
 
                 @foreach ($technologies as $technology)
@@ -105,7 +119,8 @@
                             Project
                             View</label>
                         <input type="text" class="form-control" name="link_to_project_view" id="link_to_project_view"
-                            aria-describedby="link_to_project_viewHelp" placeholder="Type here the Link to the Project View"
+                            aria-describedby="link_to_project_viewHelp"
+                            placeholder="Type here the Link to the Project View"
                             value="{{ old('link_to_project_view', $project->link_to_project_view) }}">
                     </div>
 
