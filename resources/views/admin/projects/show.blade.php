@@ -11,8 +11,9 @@
                         <h3 class="card-title text-light fw-bolder pt-2">
                             {{ $project->title }}
                         </h3>
-                        <a class="btn btn-light text-decoration-none text-secondary" href="{{ route('admin.projects.index') }}">
-                            <i class="fa-solid fa-circle-left"></i> 
+                        <a class="btn btn-light text-decoration-none text-secondary"
+                            href="{{ route('admin.projects.index') }}">
+                            <i class="fa-solid fa-circle-left"></i>
                             Back to the projects</a>
                     </div>
 
@@ -24,11 +25,26 @@
                         </p>
                         <div class="project-date">
                             <div class="projectStart">
-                               Start Date: {{ $project->project_start_date }}
+                                Start Date: {{ $project->project_start_date }}
                             </div>
                             <div class="projectEnd">
                                 End Date: {{ $project->project_end_date }}
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body text-secondary">
+
+                        <small>Technology:</small>
+
+                        <div class="text-secondary">
+                            @forelse ($project->technologies as $technology)
+                                <span class="badge p-bg-light">{{ $technology->name }}</span>
+
+                            @empty
+
+                                <span class="badge p-bg-light">n/a</span>
+                            @endforelse
                         </div>
                     </div>
 
@@ -43,7 +59,7 @@
                         </a>
                     </div>
 
-                    
+
 
 
 

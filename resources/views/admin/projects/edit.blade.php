@@ -54,6 +54,37 @@
                     value="{{ old('project_end_date', $project->project_end_date) }}">
             </div>
 
+            <label class="form-label fw-light" for="technology">Project Type</label>
+            <div class="mb-3 d-flex border rounded gap-1 py-2">
+
+                @foreach ($technologies as $technology)
+                    @if ($errors->any())
+                        <div class="form-check ">
+                            <h4 class="text-danger">error</h4>
+
+
+                            <div class="form-check">
+
+                                <input name="technologies[]" type="checkbox" class="btn-check"
+                                    id="tag-{{ $technology->id }}" value="{{ $technology->id }}" autocomplete="off"
+                                    {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
+                                <label class="btn text-light"
+                                    for="tag-{{ $technology->id }}">{{ $technology->name }}</label>
+
+                            </div>
+                        @else
+                            <div class="form-check">
+
+                                <input name="technologies[]" type="checkbox" class="btn" id="tag-{{ $technology->id }}"
+                                    value="{{ $technology->id }}" autocomplete="off"
+                                    {{ in_array($technology->id, $project->technologies->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                <label class="btn" for="tag-{{ $technology->id }}">{{ $technology->name }}
+                                </label>
+
+                            </div>
+                    @endif
+                @endforeach
+            </div>
 
             <div class="image_box d-flex justify-content-between mb-4">
 

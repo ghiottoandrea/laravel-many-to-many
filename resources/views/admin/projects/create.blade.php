@@ -36,6 +36,21 @@
                     value="{{ old('project_end_date') }}">
             </div>
 
+            <label class="form-label fw-light" for="technology">Project Type</label>
+            <div class="mb-3 d-flex border rounded gap-1 py-2">
+
+                @foreach ($technologies as $technology)
+                    <div class="form-check ">
+
+                        <input name="technologies[]" type="checkbox" class="btn" id="tag-{{ $technology->id }}"
+                            value="{{ $technology->id }}" autocomplete="off"
+                            {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
+                        <label class="btn" for="tag-{{ $technology->id }}">{{ $technology->name }}</label>
+
+                    </div>
+                @endforeach
+            </div>
+
             <div class="mb-3">
                 <label class="text-light fw-light" for="link_to_source_code" class="form">Link to the Source Code</label>
                 <input type="text" class="form-control" name="link_to_source_code" id="link_to_source_code"
